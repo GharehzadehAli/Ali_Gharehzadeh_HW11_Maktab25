@@ -2,31 +2,30 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "addresses")
 public class Address implements Serializable {
-    public Address(){}
-    public Address(String city,String state,String number,String postalAddress,String postalCode){
-        this.city=city;
-        this.state=state;
-        this.number=number;
-        this.postalAddress=postalAddress;
-        this.postalCode=postalCode;
+    public Address() {
     }
-    @OneToOne(mappedBy = "address")
-    Teacher teacher;
-    @OneToOne(mappedBy = "address")
-    Student student;
+
+    public Address(String city,String postalAddress, String postalCode) {
+        this.city = city;
+        this.postalAddress = postalAddress;
+        this.postalCode = postalCode;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "city")
     private String city;
-    @Column(name = "state")
-    private String state;
-    @Column(name = "number",nullable = false,unique = true)
-    private String number;
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL)
+    private List<PhoneNumber> phoneNumbers;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
     @Column(name = "postalAddress")
     private String postalAddress;
     @Column(name = "postalCode")
@@ -48,21 +47,36 @@ public class Address implements Serializable {
         this.city = city;
     }
 
-    public String getState() {
-        return state;
+
+    public List<PhoneNumber> getPhoneNumbers() {
+        return phoneNumbers;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setPhoneNumbers(List<PhoneNumber> phoneNumbers) {
+        this.phoneNumbers = phoneNumbers;
     }
 
-    public String getNumber() {
-        return number;
+    public Employee getEmployee() {
+        return employee;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
+    public String getPostalAddress() {
+        return postalAddress;
+    }
 
+    public void setPostalAddress(String postalAddress) {
+        this.postalAddress = postalAddress;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
 }
