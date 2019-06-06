@@ -1,13 +1,13 @@
 package com.example;
 
 public class Cat extends Animal {
-    String breed;
+    BreedType breed;
 
-    public String getBreed() {
+    public BreedType getBreed() {
         return breed;
     }
 
-    public void setBreed(String breed) {
+    public void setBreed(BreedType breed) {
         this.breed = breed;
     }
 }

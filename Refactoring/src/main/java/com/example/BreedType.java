@@ -1,6 +1,6 @@
 package com.example;
 
-public enum  BreedType {
+public enum BreedType {
     Abyssinian,
     Aegean,
     American_Bobtail,
