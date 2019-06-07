@@ -23,7 +23,7 @@ abstract public class BaseDaoImpl<E extends Serializable> implements BaseDAO<E> 
 
         session.beginTransaction();
 
-        session.save(e);
+        session.persist(e);
 
         session.getTransaction().commit();
 

@@ -2,6 +2,7 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,10 +11,11 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String city,String postalAddress, String postalCode) {
+    public Address(String city,String postalAddress, String postalCode,Employee employee) {
         this.city = city;
         this.postalAddress = postalAddress;
         this.postalCode = postalCode;
+        this.employee=employee;
     }
 
     @Id
@@ -30,7 +32,12 @@ public class Address implements Serializable {
     private String postalAddress;
     @Column(name = "postalCode")
     private String postalCode;
-
+    public void addPhoneNumber(PhoneNumber phoneNumber) {
+        if (this.phoneNumbers == null) {
+            this.phoneNumbers = new ArrayList<>();
+        }
+        this.phoneNumbers.add(phoneNumber);
+    }
     public long getId() {
         return id;
     }
@@ -78,5 +85,16 @@ public class Address implements Serializable {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", city='" + city + '\'' +
+                ", employee=" + employee +
+                ", postalAddress='" + postalAddress + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                '}';
     }
 }

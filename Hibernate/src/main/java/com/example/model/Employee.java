@@ -2,6 +2,7 @@ package com.example.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,7 +27,12 @@ public class Employee implements Serializable {
     private String empCode;
     @Column(name = "salary")
     private double salary;
-
+    public void addAddress(Address address) {
+        if (this.addresses == null) {
+            this.addresses = new ArrayList<>();
+        }
+        this.addresses.add(address);
+    }
     public long getId() {
         return id;
     }
@@ -65,5 +71,15 @@ public class Employee implements Serializable {
 
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", empCode='" + empCode + '\'' +
+                ", salary=" + salary +
+                '}';
     }
 }
